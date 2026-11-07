@@ -1,0 +1,22 @@
+"""Validate the initial unformatted detector against the real Watson service."""
+
+import json
+import unittest
+
+from emotion_detection import emotion_detector
+
+
+class TestRawEmotionDetection(unittest.TestCase):
+    """Check the response returned before the output-formatting task."""
+
+    def test_watson_response(self):
+        """The Watson response contains all five scores for an angry statement."""
+        response = json.loads(emotion_detector("I am really mad about this"))
+        emotions = response["emotionPredictions"][0]["emotion"]
+        for emotion in ("anger", "disgust", "fear", "joy", "sadness"):
+            self.assertIsInstance(emotions[emotion], (int, float))
+        self.assertEqual(max(emotions, key=emotions.get), "anger")
+
+
+if __name__ == "__main__":
+    unittest.main()

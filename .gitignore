@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Incomplete or failed evidence is not submission evidence.
+submission/*.pending
+submission/*_failed.txt
