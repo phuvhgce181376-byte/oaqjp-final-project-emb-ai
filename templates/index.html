@@ -1,32 +1,69 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="./static/mywebscript.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NLP - Emotion Detection</title>
+    <script src="{{ url_for('static', filename='mywebscript.js') }}" defer></script>
     <style>
-        .center-heading {
-            text-align: center;
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 56px 24px;
+            background: #f4f6f8;
+            color: #202936;
+            font: 18px/1.6 Arial, sans-serif;
+        }
+        main {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid #dce1e7;
+            border-radius: 10px;
+            background: white;
+        }
+        h1 { margin: 0 0 32px; text-align: center; font-size: 32px; }
+        h2 { margin: 32px 0 12px; font-size: 23px; }
+        label { display: block; margin-bottom: 12px; font-weight: bold; }
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #8996a6;
+            border-radius: 5px;
+            resize: vertical;
+            font: inherit;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 22px;
+            border: 0;
+            border-radius: 5px;
+            background: #1754aa;
+            color: white;
+            font: inherit;
+            cursor: pointer;
+        }
+        button:disabled { cursor: wait; opacity: 0.65; }
+        #system_response {
+            min-height: 94px;
+            padding: 20px;
+            border: 1px solid #dce1e7;
+            border-radius: 5px;
+            background: #f8fafc;
+            overflow-wrap: anywhere;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card-body">
-            <h1 class="center-heading">NLP - Emotion Detection</h1> 
-            <div style="padding: 25px 25px 25px 25px;">
-            <h2 class="mb-3">
-                <label class="form-label">Please enter the text to be analyzed</label>
-                <input type="textarea" class="form-control" id="textToAnalyze">
-            </h2>
-
-            <div style="padding: 25px 25px 25px 25px;">
-                <button onclick="RunSentimentAnalysis()" class="btn btn-secondary">Run Sentiment Analysis</button>
-            </div>
-            <div style="padding: 25px 25px 25px 25px;"></div>
-            <h2 class="mb-3">
-                <label class="form-label">Result of Emotion Detection</label>
-            </h2>
-
-            <div id="system_response" style="padding: 25px 25px 25px 25px;"></div>
-        </div>
-    </div>
+    <main>
+        <h1>NLP - Emotion Detection</h1>
+        <form id="emotion-form">
+            <label for="textToAnalyze">Please enter the text to be analyzed</label>
+            <textarea id="textToAnalyze" name="textToAnalyze" rows="3"></textarea>
+            <button type="submit" id="analyze-button">Run Emotion Analysis</button>
+        </form>
+        <h2>Result of Emotion Detection</h2>
+        <div id="system_response" role="status" aria-live="polite"></div>
+    </main>
 </body>
+</html>

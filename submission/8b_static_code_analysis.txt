@@ -1,0 +1,7 @@
+Working directory: C:\Users\HP\Desktop\cousera\final_project
+Command: C:\Users\HP\Desktop\cousera\final_project\.venv\Scripts\python.exe -m pylint server.py
+
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+

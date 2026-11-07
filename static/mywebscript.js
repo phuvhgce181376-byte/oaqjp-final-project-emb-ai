@@ -1,12 +1,22 @@
-let RunSentimentAnalysis = ()=>{
-    textToAnalyze = document.getElementById("textToAnalyze").value;
+"use strict";
 
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("system_response").innerHTML = xhttp.responseText;
-        }
-    };
-    xhttp.open("GET", "emotionDetector?textToAnalyze"+"="+textToAnalyze, true);
-    xhttp.send();
+async function runEmotionAnalysis(event) {
+    event.preventDefault();
+    const button = document.getElementById("analyze-button");
+    const result = document.getElementById("system_response");
+    const text = document.getElementById("textToAnalyze").value;
+    const params = new URLSearchParams({ textToAnalyze: text });
+
+    button.disabled = true;
+    result.textContent = "Analyzing...";
+    try {
+        const response = await fetch(`/emotionDetector?${params.toString()}`);
+        result.textContent = await response.text();
+    } catch {
+        result.textContent = "Unable to connect to the application. Please try again.";
+    } finally {
+        button.disabled = false;
+    }
 }
+
+document.getElementById("emotion-form").addEventListener("submit", runEmotionAnalysis);
